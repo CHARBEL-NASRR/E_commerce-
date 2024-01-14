@@ -1,0 +1,122 @@
+ex1
+create or replace function usd_to_lbp(amount number) 
+return number
+is
+begin
+    return amount * 90000;
+end;
+/
+
+
+ex2
+create or replace function maxsalaryindept(departmentid number)
+ return number
+is
+    maxsalary number;
+BEGIN
+    select MAX(salaire) 
+    into max_salary
+    FROM emp
+    where deptID = department_id;
+    return maxsalary;
+end;
+/
+select maxsalaryindept(1)
+from emp;
+
+
+ex3
+create sequence empseq START WITH 1 INCREMENT BY 1;
+
+create or replace procedure insert( empName varchar2,salary number,deptName varchar2)
+ is
+    dept_id number;
+begin
+    select deptID 
+    into dept_id
+    FROM dept
+    WHERE nomDept = deptName;
+
+    insert into emp value (empseq.NEXTVAL, empName, salary, dept_id);
+    commit;
+end;
+/
+
+begin
+insert('charbel',5000,'roumieh');
+end;
+
+
+ex4
+create or replace function salaryclass(salary number) 
+return varchar2 
+is
+  avgsalary number
+  result varchar2;
+begin
+ 
+  select AVG(salary) 
+  into avgsalary 
+  from emp;
+  if salary > avgsalary 
+   then
+    result := 'over the average';
+  elseif
+    salary < avg_salary 
+   then
+    result := 'less then the average';
+  else
+    result := 'equal to the average';
+  end if;
+  
+  return result;
+end SalaryClass;
+/
+
+declare salaryy varchar2;
+begin
+salaryy:= salaryclass(1000);
+  DBMS_OUTPUT.PUT_LINE('Salary is ' || salaryclass);
+END;
+/
+
+ex5
+
+ create or replace function countemployeesindepartment(deptName VARCHAR2) 
+  return number 
+  is
+  totalemployees number;
+begin
+ 
+  select COUNT(*) 
+  into totalemployees
+  from emp WHERE nomdept = deptName;
+
+  return totalemployees;
+end countemployeesindepartment;
+/
+
+declare
+  dept varchar2 := 'zahle'; 
+  num number;
+begin
+  num := countemployeesindepartment(dept);
+  DBMS_OUTPUT.PUT_LINE('total employees in ' || dept || ': ' || num);
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

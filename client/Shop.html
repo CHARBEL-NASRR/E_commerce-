@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CHARBEL-Brand</title>
+    <link rel="stylesheet" href="styleShop.css">
+    <link rel="stylesheet" href="styleHome.css">
+</head>
+
+<body>
+
+    <div>
+        <nav>
+            <h2 class="logo">charbel nasr</h2>
+            <ul>
+                <li><a href="About.html">About</a></li>
+                <li><a href="Shop.html">Shop</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="shope-page">
+            <div class="container">
+                <div class="gallery" data-tshirt-id="1" data-price="20">
+                    <img src="images.jfif">
+                    <h4 class="desc">$20</h4>
+                    <button class="order-btn">Order</button>
+                </div>
+
+                <div class="gallery" data-tshirt-id="2" data-price="25">
+                    <img src="image1.png">
+                    <h4 class="desc">$25</h4>
+                    <button class="order-btn">Order</button>
+                </div>
+
+
+                <div class="gallery" data-tshirt-id="3" data-price="30">
+                    <img src="image2.png">
+                    <h4 class="desc">$30</h4>
+                    <button class="order-btn">Order</button>
+                </div>
+
+
+                <div class="gallery" data-tshirt-id="4" data-price="10">
+                    <img src="image3.png">
+                    <h4 class="desc">$10</h4>
+                    <button class="order-btn">Order</button>
+                </div>
+
+                <div class="gallery" data-tshirt-id="5" data-price="25">
+                    <img src="image4.png">
+                    <h4 class="desc">25$</h4>
+                    <button class="order-btn">Order</button>
+                </div>
+
+
+                <div class="gallery" data-tshirt-id="6" data-price="18">
+                    <img src="image5.png">
+                    <h4 class="desc">18$</h4>
+                    <button class="order-btn">Order</button>
+                </div>
+
+
+                <div class="gallery" data-tshirt-id="7" data-price="60">
+                    <img src="image6.png">
+                    <h4 class="desc">60$</h4>
+                    <button class="order-btn">Order</button>
+                </div>
+
+
+                <div class="gallery" data-tshirt-id="8" data-price="70">
+                    <img src="image7.png">
+                    <h4 class="desc">70$</h4>
+                    <button class="order-btn">Order</button>
+                </div>
+
+
+                <div id="totalPriceDisplay">
+                    <p>Total Price: $<span id="totalPrice">0</span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let totalPrice = 0;
+
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tshirtId = button.parentElement.getAttribute('data-tshirt-id');
+                const price = parseFloat(button.parentElement.getAttribute('data-price'));
+
+                // Create a form dynamically
+                const form = document.createElement('form');
+                form.action = '/order';
+                form.method = 'POST';
+
+                
+                const tshirtIdInput = document.createElement('input');
+                tshirtIdInput.type = 'hidden';
+                tshirtIdInput.name = 'tshirtId';
+                tshirtIdInput.value = tshirtId;
+
+                
+                form.appendChild(tshirtIdInput);
+
+                
+                document.body.appendChild(form);
+
+               
+                form.submit();
+
+               
+                document.body.removeChild(form);
+
+                
+                totalPrice += price;
+                document.getElementById("totalPrice").innerText = totalPrice.toFixed(2);
+                alert(`Item ordered! Total Price: $${totalPrice.toFixed(2)}`);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

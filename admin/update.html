@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        li {
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #message {
+            margin-top: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+
+<body>
+    <h1>Update T-Shirt Information</h1>
+    <ul>
+        <li><a href="update.html">change</a></li>
+        <li><a href="see.html">see</a></li>
+        <li><a href="career.html">career></a></li>
+    </ul>
+
+    <form id="updateForm" action="/admin/update" method="POST">
+        <label for="action">Action:</label>
+        <select name="action" id="action">
+            <option value="updateprice">Updateprice</option>
+            <option value="delete">Delete</option>
+            <option value="addStock">Add Stock</option>
+            <option value="add">Add </option>
+
+        </select><br>
+
+        <label for="tshirtId">T-Shirt ID:</label>
+        <input type="text" id="tshirtId" name="tshirtId" required><br>
+
+        <label for="stock">Stock:</label>
+        <input type="text" id="stock" name="stock" required><br>
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div id="message"></div>
+
+</body>
+
+</html>

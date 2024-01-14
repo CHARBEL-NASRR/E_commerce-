@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Viewer</title>
+    <style>
+        .file-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .file-list-item {
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .file-content {
+            white-space: pre-line;
+        }
+
+        .file-list-item.selected {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>File Viewer</h1>
+    <ul id="fileList" class="file-list"></ul>
+    <div id="fileContent" class="file-content"></div>
+
+    <script>
+        const fileList = document.getElementById('fileList');
+        const fileContent = document.getElementById('fileContent');
+
+       
+        fetch('/files')
+            .then(response => response.json())
+            .then(data => {
+                data.files.forEach(file => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = file;
+                    listItem.classList.add('file-list-item');
+                    listItem.addEventListener('click', () => loadFileContent(file, listItem));
+                    fileList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching file list:', error));
+
+        function loadFileContent(filename, listItem) {
+          
+            const previouslySelected = fileList.querySelector('.file-list-item.selected');
+            if (previouslySelected) {
+                previouslySelected.classList.remove('selected');
+            }
+
+          
+           fetch(`/file/${filename}`)
+                .then(response => response.text())
+                .then(content => {
+                    fileContent.textContent = `Content of ${filename}:\n\n${content}`;
+                })
+                .catch(error => console.error('Error fetching file content:', error));
+
+            
+            listItem.classList.add('selected');
+
+            
+        }
+    </script>
+</body>
+</html>

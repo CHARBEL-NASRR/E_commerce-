@@ -1,0 +1,110 @@
+ex1
+ 
+create or replace procedure app_emp_dept
+is
+cursor emp_dept_cursor is select nomemp, nomdept from emp,dept
+where emp.deptid = dept.iddept order by nomemp asc;
+
+begin
+FOR crow in emp_dept_cursor loop
+
+dbms_output.put_line('Employee '||crow.nomemp||' works at '||crow.nomdept);
+
+end loop;
+end;
+/
+
+execute app_emp_dept;
+
+ex2
+
+create or replace procedure top_salaries (n number)
+is
+CURSOR emp_sal_cursor is select distinct salaire from emp order by salaire desc;
+
+salary emp.salaire%type;
+
+begin
+open emp_sal_cursor;
+for i in 1..n
+loop
+fetch emp_sal_cursor into salary;
+
+dbms_output.put_line(salary);
+
+end loop;
+end;
+/ 
+
+execute top_salaries(5);
+
+ex3
+
+declare
+cursor salary_policy_cursor is select nomemp,salaire,nomdept from emp,dept
+where emp.deptid=dept.iddept and salaire is not null;
+
+empname emp.nomemp%type;
+salary emp.salaire%type;
+deptname dept.nomdept%type;
+
+begin
+open  salary_policy_cursor;
+fetch salary_policy_cursor into empname,salary,deptname;
+while salary_policy_cursor%found loop
+if deptname='Baabda' then salary:=salary-200;
+ elsif deptname='Grenoble' then salary:=salary+300;
+ elsif deptname='Zahle' then salary:=salary*1.5;
+end if;
+dbms_output.put_line(empname||' '||deptname||' '||salary);
+fetch salary_policy_cursor into empname,salary,deptname;
+end loop;
+end;
+/
+
+ex4
+
+declare 
+cursor emp_copy_cursor is select id,nomemp,salaire,deptid from emp;
+empid emp.id%type;
+ename emp.nomemp%type;
+esalary emp.salaire%type;
+edeptid emp.deptid%type;
+begin
+open emp_copy_cursor;
+if emp_copy_cursor%notfound
+then 
+insert into backup_emp values (0,'No employees',null,null);
+else
+loop
+fetch emp_copy_cursor into empid,ename,esalary,edeptid;
+if esalary is null then esalary:=0;
+END IF;
+insert into backup_emp values (empid,ename,esalary,edeptid);
+exit when emp_copy_cursor%notfound;
+end loop;
+end if;
+end;
+/
+
+select * from backup_emp;
+
+ex5
+
+declare
+cursor c1 is select table_name from user_tab_columns;
+
+cursor c2(tname varchar) is select table_name,column_name,data_type from user_tab_columns where table_name= tname;
+
+begin
+for i in c1 loop
+exit when c1%notfound;
+dbms_output.put_line(i.table_name||' has the following columns:');
+
+for jj IN c2(i.table_name) loop
+dbms_output.put_line('====='||jj.column_name||' with datatype '||jj.data_type);
+
+end loop;
+end loop;
+end;
+/

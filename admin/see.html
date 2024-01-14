@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Table Data</title>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        li {
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        table {
+            width: 80%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+            button:hover {
+                background-color: #555;
+            }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Employee Data</h1>
+    <ul>
+        <li><a href="update.html">change</a></li>
+        <li><a href="see.html">see</a></li>
+        <li><a href="career.html">career></a></li>
+    </ul>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>username</th>
+                <th>tishirt_id</th>
+                <th>totleprice</th>
+                <th>orderdate</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/data');
+            const data = await response.json();
+            const tableBody = document.getElementById('tableBody');
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                  <td>${item.order_id}</td>
+                  <td>${item.username}</td>
+                  <td>${item.tshirt_id}</td>
+                  <td>${item.total_price}</td>
+                  <td>${item.order_date}</td>
+                  <td><button onclick="deleteItem(${item.order_id})">Delete</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        async function deleteItem(id) {
+            const response = await fetch('/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id=${id}`,
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                document.getElementById('tableBody').innerHTML = '';
+                fetchData();
+            } else {
+                alert('Item deletion failed. ' + result.message);
+            }
+        }
+
+        fetchData();
+    </script>
+
+</body>
+</html>

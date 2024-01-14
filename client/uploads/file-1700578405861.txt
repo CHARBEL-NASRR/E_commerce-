@@ -1,0 +1,69 @@
+ex1
+create or replace procedure associate_emp_dept(empname emp.nomemp%type, did dept.iddept%type) as
+  empnotfound exception;
+begin
+  update emp
+  set did = deptid
+  where nomemp = empname;
+
+  if sql%notfound then
+    raise empnotfound;
+  end if;
+
+exception
+  when empnotfound then
+    dbms_output.put_line('Employee not found');
+end;
+/
+
+ex2
+
+create or replace procedure app_emp_dept
+is
+h exception;
+e varcha2;
+cursor c_emp_ccursor is select nomemp,salaire from emp;
+begin
+for r1 in c1 loop	
+if r1.salaire > 6000
+e:=r1.nomemp;
+then raise h;
+else dbms_output.put_line(r1.nomemp);
+end if;
+end loop;
+exception
+when h then dbms_output.put_line(e||' '||'salary is over 6000');
+end;
+/
+
+ex3
+
+declare
+v_department_name varchar2(50) := '&v_department_name'; 
+v_emp_count number;
+e exception;
+begin
+select v_department_name into v_department_name from dept where deptname = lower(v_department_name);
+begin
+select count(*) into v_emp_count
+from emp
+where deptname = lower(v_department_name);
+     if v_emp_count = 0 then
+            raise_application_error(-20003, 'Invalid department');
+        end if;
+    exception
+        when no_data_found then 
+            raise_application_error(-20003, 'Department not found');
+    end;
+
+    dbms_output.put_line('Number of employees in department ' || v_department_name || ': ' || v_emp_count);
+end;
+/
+
+
+
+
+
+
+
+

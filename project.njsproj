@@ -1,0 +1,127 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>project</Name>
+    <RootNamespace>project</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>bafab846-647f-4bbc-af66-4ceebcedf850</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>server.js</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <NodejsPort>1337</NodejsPort>
+    <StartWebBrowser>true</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="admin\career.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="admin\see.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="admin\update.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="client\About.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="client\Contact.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="client\Shop.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="client\styleContact.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="client\styleHome.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="client\styleShop.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="html file\index.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="client\images.jfif" />
+    <Content Include="Images\aboutimage.jpeg" />
+    <Content Include="Images\background.jpeg" />
+    <Content Include="client\image1.png" />
+    <Content Include="Images\image10.png" />
+    <Content Include="Images\image11.png" />
+    <Content Include="client\image2.png" />
+    <Content Include="client\image3.png" />
+    <Content Include="client\image4.png" />
+    <Content Include="client\image5.png" />
+    <Content Include="client\image6.png" />
+    <Content Include="client\image7.png" />
+    <Content Include="Images\image8.png" />
+    <Content Include="Images\image9.png" />
+    <Content Include="server.js" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="styleContact.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="admin\uploads\" />
+    <Folder Include="client\uploads\" />
+    <Folder Include="html file\" />
+    <Folder Include="client\" />
+    <Folder Include="admin\" />
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
