@@ -1,123 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <title>Admin Panel</title>
     <style>
         body {
-            background-color: #f4f4f4;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
         }
 
-        h1 {
-            color: #333;
+        h1, h2 {
             margin-bottom: 20px;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            margin-bottom: 30px;
-        }
-
-        li {
-            margin-right: 20px;
-        }
-
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
         form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: left;
+            margin-bottom: 30px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #333;
+            margin-bottom: 10px;
         }
 
-        select,
-        input {
+        input[type="file"], input[type="number"], input[type="text"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 8px;
+            margin-bottom: 10px;
             box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
         }
 
         button {
-            background-color: #333;
+            padding: 10px 20px;
+            background-color: #007bff;
             color: #fff;
-            padding: 10px 15px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        #message {
-            margin-top: 20px;
-            color: #333;
-            font-weight: bold;
-        }
+            button:hover {
+                background-color: #0056b3;
+            }
     </style>
 </head>
-
-
 <body>
-    <h1>Update T-Shirt Information</h1>
-    <ul>
-        <li><a href="update.html">change</a></li>
-        <li><a href="see.html">see</a></li>
-        <li><a href="career.html">career></a></li>
-    </ul>
-
-    <form id="updateForm" action="/admin/update" method="POST">
-        <label for="action">Action:</label>
-        <select name="action" id="action">
-            <option value="updateprice">Updateprice</option>
-            <option value="delete">Delete</option>
-            <option value="addStock">Add Stock</option>
-            <option value="add">Add </option>
-
-        </select><br>
-
-        <label for="tshirtId">T-Shirt ID:</label>
-        <input type="text" id="tshirtId" name="tshirtId" required><br>
-
-        <label for="stock">Stock:</label>
-        <input type="text" id="stock" name="stock" required><br>
-
+    <h1>Admin Panel</h1>
+    <h2>Add New Product</h2>
+    <form action="/admin/update" method="POST" enctype="multipart/form-data">
+        <label for="photo">Product Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*" required><br><br>
         <label for="price">Price:</label>
-        <input type="text" id="price" name="price" required><br>
-
-        <button type="submit">Submit</button>
+        <input type="number" id="price" name="price" required><br><br>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required><br><br>
+        <button type="submit" name="action" value="add">Add Product</button>
     </form>
-    <div id="message"></div>
-
+    <h2>Update Product Price</h2>
+    <form action="/admin/update" method="POST">
+        <label for="tshirtIdUpdate">T-Shirt ID:</label>
+        <input type="text" id="tshirtIdUpdate" name="tshirtId" required><br><br>
+        <label for="priceUpdate">New Price:</label>
+        <input type="number" id="priceUpdate" name="price" required><br><br>
+        <button type="submit" name="action" value="updateprice">Update Price</button>
+    </form>
+    <h2>Add Stock</h2>
+    <form action="/admin/update" method="POST">
+        <label for="tshirtIdStock">T-Shirt ID:</label>
+        <input type="text" id="tshirtIdStock" name="tshirtId" required><br><br>
+        <label for="stockAdd">Additional Stock:</label>
+        <input type="number" id="stockAdd" name="stock" required><br><br>
+        <button type="submit" name="action" value="addStock">Add Stock</button>
+    </form>
+    <h2>Delete Product</h2>
+    <form action="/admin/update" method="POST">
+        <label for="tshirtIdDelete">T-Shirt ID:</label>
+        <input type="text" id="tshirtIdDelete" name="tshirtId" required><br><br>
+        <button type="submit" name="action" value="delete">Delete Product</button>
+    </form>
 </body>
-
 </html>

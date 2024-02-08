@@ -37,6 +37,7 @@
     <Content Include="admin\update.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="admin\uploads\photo-1706726595998.jpg" />
     <Content Include="client\About.html">
       <SubType>Code</SubType>
     </Content>

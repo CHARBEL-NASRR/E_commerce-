@@ -1,126 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CHARBEL-Brand</title>
-    <link rel="stylesheet" href="styleShop.css">
-    <link rel="stylesheet" href="styleHome.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .item {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+        }
+
+            .item img {
+                width: 100%;
+                height: auto;
+            }
+
+            .item p {
+                margin: 10px 0;
+            }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Set your desired background color */
+        }
+
+        nav {
+            background-color: #333; /* Set your desired background color for the navigation */
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        li {
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        section.about1 {
+            padding: 50px 0;
+            background-color: #fff; /* Set your desired background color for the about section */
+        }
+
+        .main {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .about-text {
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        h5 {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+
+
+
 </head>
-
 <body>
-
-    <div>
-        <nav>
-            <h2 class="logo">charbel nasr</h2>
-            <ul>
-                <li><a href="About.html">About</a></li>
-                <li><a href="Shop.html">Shop</a></li>
-                <li><a href="Contact.html">Contact</a></li>
-            </ul>
-        </nav>
-
-        <div class="shope-page">
-            <div class="container">
-                <div class="gallery" data-tshirt-id="1" data-price="20">
-                    <img src="images.jfif">
-                    <h4 class="desc">$20</h4>
-                    <button class="order-btn">Order</button>
-                </div>
-
-                <div class="gallery" data-tshirt-id="2" data-price="25">
-                    <img src="image1.png">
-                    <h4 class="desc">$25</h4>
-                    <button class="order-btn">Order</button>
-                </div>
-
-
-                <div class="gallery" data-tshirt-id="3" data-price="30">
-                    <img src="image2.png">
-                    <h4 class="desc">$30</h4>
-                    <button class="order-btn">Order</button>
-                </div>
-
-
-                <div class="gallery" data-tshirt-id="4" data-price="10">
-                    <img src="image3.png">
-                    <h4 class="desc">$10</h4>
-                    <button class="order-btn">Order</button>
-                </div>
-
-                <div class="gallery" data-tshirt-id="5" data-price="25">
-                    <img src="image4.png">
-                    <h4 class="desc">25$</h4>
-                    <button class="order-btn">Order</button>
-                </div>
-
-
-                <div class="gallery" data-tshirt-id="6" data-price="18">
-                    <img src="image5.png">
-                    <h4 class="desc">18$</h4>
-                    <button class="order-btn">Order</button>
-                </div>
-
-
-                <div class="gallery" data-tshirt-id="7" data-price="60">
-                    <img src="image6.png">
-                    <h4 class="desc">60$</h4>
-                    <button class="order-btn">Order</button>
-                </div>
-
-
-                <div class="gallery" data-tshirt-id="8" data-price="70">
-                    <img src="image7.png">
-                    <h4 class="desc">70$</h4>
-                    <button class="order-btn">Order</button>
-                </div>
-
-
-                <div id="totalPriceDisplay">
-                    <p>Total Price: $<span id="totalPrice">0</span></p>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    <nav>
+        <h2 class="logo">charbel nasr</h2>
+        <ul>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Shop.html">Shop</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <h1>Shop</h1>
+    <div id="image-container"></div>
 
     <script>
-        let totalPrice = 0;
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitOrder = (tshirt_id, price) => {
+                fetch('/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        tshirt_id: tshirt_id,
+                        price: price
+                    })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Display order completion message
+                            alert('Order completed!');
+                        } else {
+                            throw new Error('Failed to submit order');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error submitting order:', error);
+                        alert('Failed to submit order. Please try again later.');
+                    });
+            };
 
-        document.querySelectorAll('.order-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const tshirtId = button.parentElement.getAttribute('data-tshirt-id');
-                const price = parseFloat(button.parentElement.getAttribute('data-price'));
+            // Fetch data from the server
+            fetch('/admin/uploads')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('image-container');
 
-                // Create a form dynamically
-                const form = document.createElement('form');
-                form.action = '/order';
-                form.method = 'POST';
+                    // Loop through each item in the data array
+                    data.forEach(item => {
+                        // Create a div element to hold each item
+                        const itemDiv = document.createElement('div');
+                        itemDiv.classList.add('item');
 
-                
-                const tshirtIdInput = document.createElement('input');
-                tshirtIdInput.type = 'hidden';
-                tshirtIdInput.name = 'tshirtId';
-                tshirtIdInput.value = tshirtId;
+                        // Create an img element for the photo
+                        const img = document.createElement('img');
+                        img.src = item.photo_path;
+                        img.alt = 'T-shirt Photo';
+                        itemDiv.appendChild(img);
 
-                
-                form.appendChild(tshirtIdInput);
+                        // Create paragraphs for ID, price, and stock
+                        const idPara = document.createElement('p');
+                        idPara.textContent = `ID: ${item.tshirt_id}`;
+                        itemDiv.appendChild(idPara);
 
-                
-                document.body.appendChild(form);
+                        const pricePara = document.createElement('p');
+                        pricePara.textContent = `Price: ${item.price}`;
+                        itemDiv.appendChild(pricePara);
 
-               
-                form.submit();
+                        const stockPara = document.createElement('p');
+                        stockPara.textContent = `Stock: ${item.stock}`;
+                        itemDiv.appendChild(stockPara);
 
-               
-                document.body.removeChild(form);
+                        // Create an order button
+                        const orderButton = document.createElement('button');
+                        orderButton.textContent = 'Order';
+                        orderButton.dataset.tshirtId = item.tshirt_id; // Store tshirt_id as a data attribute
+                        orderButton.dataset.price = item.price; // Store price as a data attribute
+                        orderButton.addEventListener('click', () => {
+                            const tshirtId = orderButton.dataset.tshirtId; // Retrieve tshirt_id from data attribute
+                            const price = orderButton.dataset.price; // Retrieve price from data attribute
+                            submitOrder(tshirtId, price);
+                        });
+                        itemDiv.appendChild(orderButton);
 
-                
-                totalPrice += price;
-                document.getElementById("totalPrice").innerText = totalPrice.toFixed(2);
-                alert(`Item ordered! Total Price: $${totalPrice.toFixed(2)}`);
-            });
+                        // Append the itemDiv to the container
+                        container.appendChild(itemDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
         });
-
     </script>
-</body>
 
+
+
+</body>
 </html>

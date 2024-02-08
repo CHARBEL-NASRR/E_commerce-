@@ -1,3 +1,6 @@
 C:\Users\hicham\Desktop\webprogramming\project\obj\Debug\project.njsproj.AssemblyReference.cache
 C:\Users\hicham\Desktop\webprogramming\project\obj\Debug\project.njsproj.CoreCompileInputs.cache
 C:\Users\hicham\Desktop\webprogramming\project\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Users\hamad\Documents\GitHub\E_commerce-\obj\Debug\project.njsproj.AssemblyReference.cache
+C:\Users\hamad\Documents\GitHub\E_commerce-\obj\Debug\project.njsproj.CoreCompileInputs.cache
+C:\Users\hamad\Documents\GitHub\E_commerce-\bin\Microsoft.NodejsTools.WebRole.dll
